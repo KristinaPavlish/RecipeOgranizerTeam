@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj": {}
+    "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj": {}
   },
   "projects": {
-    "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj": {
+    "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj",
+        "projectUniqueName": "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj",
         "projectName": "RecipeOgranizer.Dal",
-        "projectPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj",
-        "packagesPath": "C:\\Users\\Сашка\\.nuget\\packages\\",
-        "outputPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\obj\\",
+        "projectPath": "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Сашка\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +42,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.13, )"
+              "version": "[7.0.11, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
@@ -66,36 +64,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj": {
+    "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj",
+        "projectUniqueName": "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj",
         "projectName": "RecipeOrganizer.BLL",
-        "projectPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj",
-        "packagesPath": "C:\\Users\\Сашка\\.nuget\\packages\\",
-        "outputPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\obj\\",
+        "projectPath": "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Сашка\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj": {
-                "projectPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj"
+              "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj": {
+                "projectPath": "E:\\Learning\\C# trainer\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj"
               }
             }
           }
@@ -124,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
