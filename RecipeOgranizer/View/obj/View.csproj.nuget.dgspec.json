@@ -1,0 +1,196 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\View\\View.csproj": {}
+  },
+  "projects": {
+    "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj",
+        "projectName": "RecipeOgranizer.Dal",
+        "projectPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj",
+        "packagesPath": "C:\\Users\\Сашка\\.nuget\\packages\\",
+        "outputPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Сашка\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj",
+        "projectName": "RecipeOrganizer.BLL",
+        "projectPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj",
+        "packagesPath": "C:\\Users\\Сашка\\.nuget\\packages\\",
+        "outputPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Сашка\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj": {
+                "projectPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\View\\View.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\View\\View.csproj",
+        "projectName": "View",
+        "projectPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\View\\View.csproj",
+        "packagesPath": "C:\\Users\\Сашка\\.nuget\\packages\\",
+        "outputPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\View\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Сашка\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {
+              "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj": {
+                "projectPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOgranizer.Dal\\RecipeOgranizer.Dal.csproj"
+              },
+              "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj": {
+                "projectPath": "C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.BLL\\RecipeOrganizer.BLL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
