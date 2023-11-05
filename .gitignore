@@ -1,0 +1,14 @@
+*.dll
+*.exe
+*.pdb
+*.lock
+*.vsidx
+
+.vscode/
+bin/
+obj/
+.suo
+.user
+.vscode/
+.vs
+
