@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Presentation.Books"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="List of your books" Height="400" Width="600">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="List of your books" Height="400" Width="600">
     <Window.Resources>
         <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
             <Setter Property="Template">
@@ -9,8 +9,10 @@
                     <ControlTemplate TargetType="ListViewItem">
                         <Border Background="{TemplateBinding Background}">
                             <Grid>
-                                <Button Content="Show Details" Click="ShowDetails_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,5" Tag="{Binding Bookid}" />
+                                <Button Content="Show Details" Click="ShowDetails_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,5,10,10" Tag="{Binding Bookid}" />
                                 <GridViewRowPresenter />
+                                <Button Content="Delete" Click="DeleteBook_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,5" Tag="{Binding Bookid}" />
+
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -18,12 +20,25 @@
             </Setter>
         </Style>
     </Window.Resources>
+    
     <Grid>
-        <ListView Name="BooksListView" Margin="10" Grid.Row="1" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+        
+        <StackPanel Margin="2" VerticalAlignment="Top" x:Name="AddBookPanel">
+            <TextBlock Margin="10,10,0,0" Width="80" Text="Book name:" />
+            <TextBox x:Name="NewBookNameTextBox" Width="450" Margin="0,5,0,12" />
+
+            <TextBlock Margin="10,0,0,0" Width="80" Text="Description:" />
+            <TextBox x:Name="NewBookDescriptionTextBox" Width="450" Height="40" Margin="0,5,0,5" />
+
+            <Button Content="Add book"  Width="150" Click="AddBookConfirm_Click" />
+        </StackPanel>
+        
+        <ListView Name="BooksListView" Margin="10,155" Grid.Row="1" ItemContainerStyle="{StaticResource ListViewItemStyle}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Bookname}" Width="250" />
-                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="250" />
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Bookname}" Width="150" />
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150" />
+                    
                 </GridView>
             </ListView.View>
         </ListView>

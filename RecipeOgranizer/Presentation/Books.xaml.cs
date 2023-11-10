@@ -34,11 +34,9 @@ namespace Presentation
         {
             using (RecipeOrganizerContext context = new RecipeOrganizerContext())
             {
-
                 Bll bll = new Bll(context);
                 List<Cookerybook> books = bll.GetUserCookerybooks(CurrentEmail);
                 BooksListView.ItemsSource = books;
-
             }
         }
         private void ShowDetails_Click(object sender, RoutedEventArgs e)
@@ -49,9 +47,58 @@ namespace Presentation
             var recipesWindow = new Recipes(bookId);
             recipesWindow.Show();
             this.Close();
-
-
         }
+        private void AddBookConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            string bookName = NewBookNameTextBox.Text;
+            string bookDescription = NewBookDescriptionTextBox.Text;
+
+            AddBook(bookName, bookDescription);
+
+            RefreshBooksList();
+
+            AddBookPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void DeleteBook_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int bookId = (int)button.Tag;
+
+            DeleteBook(bookId);
+
+            RefreshBooksList();
+        }
+
+        private void RefreshBooksList()
+        {
+            using (RecipeOrganizerContext context = new RecipeOrganizerContext())
+            {
+                Bll bll = new Bll(context);
+                List<Cookerybook> books = bll.GetUserCookerybooks(CurrentEmail);
+                BooksListView.ItemsSource = books;
+            }
+        }
+
+        private void AddBook(string name, string description)
+        {
+            using (RecipeOrganizerContext context = new RecipeOrganizerContext())
+            {
+                Bll bll = new Bll(context);
+                bll.addBook(name, description);
+            }
+        }
+
+        private void DeleteBook(int bookId)
+        {
+            using (RecipeOrganizerContext context = new RecipeOrganizerContext())
+            {
+                Bll bll = new Bll(context);
+                bll.deleteBook(bookId);
+            }
+        }
+
+
     }
 }
 
