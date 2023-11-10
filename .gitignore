@@ -1,0 +1,8 @@
+.idea
+obj
+/RecipeOgranizer/RecipeOgranizer.ConsoleApp/obj
+/RecipeOgranizer/RecipeOgranizer.ConsoleApp/bin
+/RecipeOgranizer/RecipeOgranizer.Dal/bin
+/RecipeOgranizer/RecipeOgranizer.Dal/obj
+/RecipeOgranizer/View/bin
+bin
