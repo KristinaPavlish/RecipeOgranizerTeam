@@ -10,4 +10,4 @@ bin
 .suo
 .lock
 .vsidx
-.v2
+*.v2
