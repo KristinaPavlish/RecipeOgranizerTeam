@@ -1,0 +1,12 @@
+﻿<Window x:Class="Presentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Start Page" Width="800" Height="600">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="171" Width="380">
+            <TextBlock Text="Welcome to RecipeOrganizer" FontSize="20" Margin="0 0 0 20" HorizontalAlignment="Center" />
+            <Button Content="Log In" Click="LogInButton_Click" Width="100" Height="40" Margin="0 0 0 20" />
+            <Button Content="Sign Up" Click="SignUpButton_Click" Width="100" Height="40" />
+        </StackPanel>
+    </Grid>
+</Window>
