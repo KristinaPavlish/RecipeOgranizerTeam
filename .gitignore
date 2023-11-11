@@ -6,3 +6,6 @@ obj
 /RecipeOgranizer/RecipeOgranizer.Dal/obj
 /RecipeOgranizer/View/bin
 bin
+.suo
+.lock
+.vsidx
