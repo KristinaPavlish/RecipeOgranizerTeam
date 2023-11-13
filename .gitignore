@@ -8,6 +8,8 @@ obj
 /RecipeOgranizer/.vs/RecipeOgranizer/FileContentIndex
 bin
 .suo
-.lock
-.vsidx
+*.lock
+*.vsidx
 *.v2
+*.v1
+/.vs
