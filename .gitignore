@@ -13,3 +13,5 @@ bin
 *.v2
 *.v1
 /.vs
+*.testlog
+*.manifest
