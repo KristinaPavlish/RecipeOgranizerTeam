@@ -55,18 +55,18 @@ public class Bll
             return false;
         }
 
-        if (IsValidEmail(email))
+        if (!IsValidEmail(email))
         {
             message = "Email must be correct!";
             return false;
         }
 
-        if (IsValidUsername(username))
+        if (!IsValidUsername(username))
         {
             message = "Username must be correct!";
             return false;
         }
-        if (IsValidPassword(password))
+        if (!IsValidPassword(password))
         {
             message = "Password must be correct!";
             return false;
