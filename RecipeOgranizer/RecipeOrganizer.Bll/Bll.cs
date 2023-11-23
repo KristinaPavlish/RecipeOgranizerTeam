@@ -1,169 +1,258 @@
-﻿using System.Text.RegularExpressions;
-using RecipeOgranizer.Dal.Context;
-using RecipeOgranizer.Dal.Models;
+﻿// <copyright file="Bll.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace RecipeOrganizer.Bll;
-public class Bll
+namespace RecipeOrganizer.Bll
 {
-    private RecipeOrganizerContext _context;
+    using System.Text.RegularExpressions;
+    using RecipeOgranizer.Dal.Context;
+    using RecipeOgranizer.Dal.Models;
 
-    public Bll(RecipeOrganizerContext context)
+    /// <summary>
+    /// This is the business logic layer class.
+    /// </summary>
+    public class Bll
     {
-        _context = context;
-    }
+        private readonly RecipeOrganizerContext context;
 
-    public User GetUserByEmail(string email)
-    {
-        return _context.Users.FirstOrDefault(u => u.Email == email);
-    }
-
-    public bool AuthenticateUser(string email, string password)
-    {
-        var user = GetUserByEmail(email);
-
-        if (user != null && user.Userpassword == password)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Bll"/> class.
+        /// </summary>
+        /// <param name="context">TEXT.</param>
+        public Bll(RecipeOrganizerContext context)
         {
+            this.context = context;
+        }
+
+        /// <summary>
+        /// Checks if the provided email is valid.
+        /// </summary>
+        /// <param name="email">The email to validate.</param>
+        /// <returns>True if the email is valid, false otherwise.</returns>
+        public static bool IsValidEmail(string email)
+        {
+            string emailPattern = @"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$";
+            return Regex.IsMatch(email, emailPattern);
+        }
+
+        /// <summary>
+        /// Checks if the provided username is valid.
+        /// </summary>
+        /// <param name="username">The username to validate.</param>
+        /// <returns>True if the username is valid, false otherwise.</returns>
+        public static bool IsValidUsername(string username)
+        {
+            string usernamePattern = @"^[a-zA-Z0-9_]+$";
+            return Regex.IsMatch(username, usernamePattern);
+        }
+
+        /// <summary>
+        /// Checks if the provided password is valid.
+        /// </summary>
+        /// <param name="password">The password to validate.</param>
+        /// <returns>True if the password is valid, false otherwise.</returns>
+        public static bool IsValidPassword(string password)
+        {
+            string passwordPattern = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$";
+            return Regex.IsMatch(password, passwordPattern);
+        }
+
+        /// <summary>
+        /// Gets a user by their email.
+        /// </summary>
+        /// <param name="email">The email of the user.</param>
+        /// <returns>The user if found, null otherwise.</returns>
+        public User? GetUserByEmail(string email)
+        {
+            return this.context.Users.FirstOrDefault(u => u.Email == email);
+        }
+
+        /// <summary>
+        /// Authenticates a user.
+        /// </summary>
+        /// <param name="email">The email of the user.</param>
+        /// <param name="password">The password of the user.</param>
+        /// <returns>True if the user is authenticated, false otherwise.</returns>
+        public bool AuthenticateUser(string email, string password)
+        {
+            var user = this.GetUserByEmail(email);
+
+            if (user != null && user.Userpassword == password)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Registers a new user.
+        /// </summary>
+        /// <param name="email">The email of the user.</param>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="password">The password of the user.</param>
+        /// <param name="message">A message indicating the result of the registration.</param>
+        /// <returns>True if the user is registered successfully, false otherwise.</returns>
+        public bool RegisterUser(string email, string username, string password, ref string message)
+        {
+            if (this.UserExists(email))
+            {
+                message = "Email must be unique!";
+                return false;
+            }
+
+            if (!IsValidEmail(email))
+            {
+                message = "Email must be correct!";
+                return false;
+            }
+
+            if (!IsValidUsername(username))
+            {
+                message = "Username must be correct!";
+                return false;
+            }
+
+            if (!IsValidPassword(password))
+            {
+                message = "Password must be correct!";
+                return false;
+            }
+
+            var newUser = new User
+            {
+                Email = email,
+                Username = username,
+                Userpassword = password,
+            };
+            this.context.Set<User>().Add(newUser);
+            this.context.SaveChanges();
+
             return true;
         }
 
-        return false;
-    }
-
-    public bool IsValidEmail(string email)
-    {
-        string emailPattern = @"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$";
-        return Regex.IsMatch(email, emailPattern);
-    }
-
-    public bool IsValidUsername(string username)
-    {
-        string usernamePattern = @"^[a-zA-Z0-9_]+$";
-        return Regex.IsMatch(username, usernamePattern);
-    }
-
-    public bool IsValidPassword(string password)
-    {
-        string passwordPattern = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$";
-        return Regex.IsMatch(password, passwordPattern);
-    }
-
-    public bool RegisterUser(string email, string username, string password, ref string message)
-    {
-        if (UserExists(email))
+        /// <summary>
+        /// Gets the cookery books of a user.
+        /// </summary>
+        /// <param name="email">The email of the user.</param>
+        /// <returns>A list of cookery books of the user.</returns>
+        public List<Cookerybook> GetUserCookerybooks(string email)
         {
-            message = "Email must be unique!";
-            return false;
+            var user = this.GetUserByEmail(email);
+
+            if (user != null)
+            {
+                var userCookerybooks = this.context.Set<Cookerybook>().Where(c => c.Userid == user.Userid).ToList();
+                return userCookerybooks;
+            }
+
+            return new List<Cookerybook>();
         }
 
-        if (!IsValidEmail(email))
+        /// <summary>
+        /// Gets a cookery book by its ID.
+        /// </summary>
+        /// <param name="bookid">The ID of the cookery book.</param>
+        /// <returns>The cookery book if found, null otherwise.</returns>
+        public Cookerybook GetBookById(int bookid)
         {
-            message = "Email must be correct!";
-            return false;
+            return this.context.Set<Cookerybook>().First(b => b.Bookid == bookid);
         }
 
-        if (!IsValidUsername(username))
+        /// <summary>
+        /// Gets the recipes of a cookery book.
+        /// </summary>
+        /// <param name="bookid">The ID of the cookery book.</param>
+        /// <returns>A list of recipes of the cookery book.</returns>
+        public List<Recipe> GetRecipes(int bookid)
         {
-            message = "Username must be correct!";
-            return false;
-        }
-        if (!IsValidPassword(password))
-        {
-            message = "Password must be correct!";
-            return false;
-        }
-        var newUser = new User
-        {
-            Email = email,
-            Username = username,
-            Userpassword = password
-        };
-        _context.Set<User>().Add(newUser);
-        _context.SaveChanges();
+            var book = this.GetBookById(bookid);
 
-        return true;
-    }
+            if (book != null)
+            {
+                var recipes = this.context.Set<Recipe>().Where(r => r.Bookid == book.Bookid).ToList();
+                return recipes;
+            }
 
-    private bool UserExists(string email)
-    {
-        return _context.Set<User>().Any(u => u.Email == email);
-    }
-    public List<Cookerybook> GetUserCookerybooks(string email)
-    {
-        var user = GetUserByEmail(email);
-
-        if (user != null)
-        {
-            var userCookerybooks = _context.Set<Cookerybook>().Where(c => c.Userid == user.Userid).ToList();
-            return userCookerybooks;
+            return new List<Recipe>();
         }
 
-        return new List<Cookerybook>();
-    }
-
-    public Cookerybook GetBookById(int bookid)
-    {
-        return _context.Set<Cookerybook>().First(b => b.Bookid == bookid);
-    }
-
-    public List<Recipe> GetRecipes(int bookid)
-    {
-        var book = GetBookById(bookid);
-
-        if (book != null)
+        /// <summary>
+        /// Adds a new cookery book.
+        /// </summary>
+        /// <param name="name">The name of the cookery book.</param>
+        /// <param name="description">The description of the cookery book.</param>
+        public void AddBook(string name, string description)
         {
-            var recipes = _context.Set<Recipe>().Where(r => r.Bookid == book.Bookid).ToList();
-            return recipes;
+            Cookerybook newBook = new Cookerybook
+            {
+                Bookname = name,
+                Description = description,
+            };
+
+            this.context.Cookerybooks.Add(newBook);
+
+            this.context.SaveChanges();
         }
 
-        return new List<Recipe>();
-    }
-
-    public void addBook(string name, string description)
-    {
-        Cookerybook newBook = new Cookerybook
+        /// <summary>
+        /// Deletes a cookery book.
+        /// </summary>
+        /// <param name="bookid">The ID of the cookery book.</param>
+        public void DeleteBook(int bookid)
         {
-            Bookname = name,
-            Description = description
-        };
+            Cookerybook? bookToDelete = this.context.Cookerybooks.Find(bookid);
 
-        _context.Cookerybooks.Add(newBook);
-
-        _context.SaveChanges();
-    }
-
-    public void deleteBook(int bookid)
-    {
-        Cookerybook bookToDelete = _context.Cookerybooks.Find(bookid);
-
-        if (bookToDelete != null)
-        {
-            _context.Cookerybooks.Remove(bookToDelete);
-            _context.SaveChanges();
+            if (bookToDelete != null)
+            {
+                this.context.Cookerybooks.Remove(bookToDelete);
+                this.context.SaveChanges();
+            }
         }
-    }
 
-    public void addRecipe(string name, string ingredients, string process)
-    {
-        Recipe newRecipe = new Recipe
+        /// <summary>
+        /// Adds a new recipe.
+        /// </summary>
+        /// <param name="name">The name of the recipe.</param>
+        /// <param name="ingredients">The ingredients of the recipe.</param>
+        /// <param name="process">The process of the recipe.</param>
+        public void AddRecipe(string name, string ingredients, string process)
         {
-            Recipename = name,
-            Ingredients = ingredients,
-            Process = process
-        };
+            Recipe newRecipe = new Recipe
+            {
+                Recipename = name,
+                Ingredients = ingredients,
+                Process = process,
+            };
 
-        _context.Recipes.Add(newRecipe);
+            this.context.Recipes.Add(newRecipe);
 
-        _context.SaveChanges();
-    }
+            this.context.SaveChanges();
+        }
 
-    public void deleteRecipe(int recipeid)
-    {
-        Recipe recipeToDelete = _context.Recipes.Find(recipeid);
-
-        if (recipeToDelete != null)
+        /// <summary>
+        /// Deletes a recipe.
+        /// </summary>
+        /// <param name="recipeid">The ID of the recipe.</param>
+        public void DeleteRecipe(int recipeid)
         {
-            _context.Recipes.Remove(recipeToDelete);
-            _context.SaveChanges();
+            Recipe? recipeToDelete = this.context.Recipes.Find(recipeid);
+
+            if (recipeToDelete != null)
+            {
+                this.context.Recipes.Remove(recipeToDelete);
+                this.context.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Checks if a user exists.
+        /// </summary>
+        /// <param name="email">The email of the user.</param>
+        /// <returns>True if the user exists, false otherwise.</returns>
+        private bool UserExists(string email)
+        {
+            return this.context.Set<User>().Any(u => u.Email == email);
         }
     }
 }

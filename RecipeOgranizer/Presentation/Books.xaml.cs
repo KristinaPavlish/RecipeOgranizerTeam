@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Books.xaml.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,26 +23,27 @@ using RecipeOrganizer.Bll;
 namespace Presentation
 {
     /// <summary>
-    /// Interaction logic for Books.xaml
+    /// Interaction logic for Books.xaml.
     /// </summary>
     public partial class Books : Window
     {
         public string CurrentEmail { get; set; }
+
         public Books(string currentEmail)
         {
-            InitializeComponent();
-            Loaded += UsersBooks_Loaded;
-            CurrentEmail = currentEmail;
+            this.InitializeComponent();
+            this.Loaded += this.UsersBooks_Loaded;
+            this.CurrentEmail = currentEmail;
         }
+
         private void UsersBooks_Loaded(object sender, RoutedEventArgs e)
         {
-            using (RecipeOrganizerContext context = new RecipeOrganizerContext())
-            {
-                Bll bll = new Bll(context);
-                List<Cookerybook> books = bll.GetUserCookerybooks(CurrentEmail);
-                BooksListView.ItemsSource = books;
-            }
+            using RecipeOrganizerContext context = new ();
+            Bll bll = new (context);
+            List<Cookerybook> books = bll.GetUserCookerybooks(this.CurrentEmail);
+            this.BooksListView.ItemsSource = books;
         }
+
         private void ShowDetails_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -48,16 +53,17 @@ namespace Presentation
             recipesWindow.Show();
             this.Close();
         }
+
         private void AddBookConfirm_Click(object sender, RoutedEventArgs e)
         {
-            string bookName = NewBookNameTextBox.Text;
-            string bookDescription = NewBookDescriptionTextBox.Text;
+            string bookName = this.NewBookNameTextBox.Text;
+            string bookDescription = this.NewBookDescriptionTextBox.Text;
 
             AddBook(bookName, bookDescription);
 
-            RefreshBooksList();
+            this.RefreshBooksList();
 
-            AddBookPanel.Visibility = Visibility.Collapsed;
+            this.AddBookPanel.Visibility = Visibility.Collapsed;
         }
 
         private void DeleteBook_Click(object sender, RoutedEventArgs e)
@@ -65,9 +71,9 @@ namespace Presentation
             Button button = (Button)sender;
             int bookId = (int)button.Tag;
 
-            DeleteBook(bookId);
+            this.DeleteBook(bookId);
 
-            RefreshBooksList();
+            this.RefreshBooksList();
         }
 
         private void RefreshBooksList()
@@ -75,17 +81,17 @@ namespace Presentation
             using (RecipeOrganizerContext context = new RecipeOrganizerContext())
             {
                 Bll bll = new Bll(context);
-                List<Cookerybook> books = bll.GetUserCookerybooks(CurrentEmail);
-                BooksListView.ItemsSource = books;
+                List<Cookerybook> books = bll.GetUserCookerybooks(this.CurrentEmail);
+                this.BooksListView.ItemsSource = books;
             }
         }
 
-        private void AddBook(string name, string description)
+        private static void AddBook(string name, string description)
         {
             using (RecipeOrganizerContext context = new RecipeOrganizerContext())
             {
                 Bll bll = new Bll(context);
-                bll.addBook(name, description);
+                bll.AddBook(name, description);
             }
         }
 
@@ -94,10 +100,10 @@ namespace Presentation
             using (RecipeOrganizerContext context = new RecipeOrganizerContext())
             {
                 Bll bll = new Bll(context);
-                bll.deleteBook(bookId);
+                bll.DeleteBook(bookId);
             }
         }
-        
+
+
     }
 }
-
