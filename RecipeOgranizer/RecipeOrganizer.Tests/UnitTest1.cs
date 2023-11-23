@@ -47,8 +47,8 @@ namespace RecipeOrganizer.Tests
             var email = "test@example.com";
             var incorrect_email = "test-example-org";
 
-            var result = _bll.IsValidEmail(email);
-            var false_result = _bll.IsValidEmail(incorrect_email);
+            var result = Bll.IsValidEmail(email);
+            var false_result = Bll.IsValidEmail(incorrect_email);
 
             Assert.IsTrue(result);
             Assert.IsFalse(false_result);
@@ -59,8 +59,8 @@ namespace RecipeOrganizer.Tests
             var password = "ValidPassword123";
             var incorrect_password = "notvalid";
 
-            var result = _bll.IsValidPassword(password);
-            var false_result = _bll.IsValidPassword(incorrect_password);
+            var result = Bll.IsValidPassword(password);
+            var false_result = Bll.IsValidPassword(incorrect_password);
 
             Assert.IsFalse(false_result);
             Assert.IsTrue(result);

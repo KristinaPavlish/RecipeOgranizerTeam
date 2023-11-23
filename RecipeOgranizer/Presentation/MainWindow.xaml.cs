@@ -1,4 +1,7 @@
-﻿using System;
+﻿// <copyright file="MainWindow.xaml.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,8 +25,9 @@ namespace Presentation
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
             Login loginPage = new Login();
@@ -31,6 +35,7 @@ namespace Presentation
 
             this.Close();
         }
+
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             SignUp signUpPage = new SignUp();
