@@ -3,41 +3,91 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="List of your books" Height="400" Width="600">
     <Window.Resources>
-        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+        <Style TargetType="TextBox" x:Key="BookTextBoxStyle">
+            <Setter Property="Background" Value="LightGray"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="BookTextBlockStyle">
+            <Setter Property="Foreground" Value="DarkBlue"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="PrimaryButtonStyle">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="CornflowerBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ListBox" x:Key="BooksListBoxStyle">
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="#F0F0F0"/>
+        </Style>
+
+        <Style TargetType="GridViewColumnHeader" x:Key="GridViewHeaderStyle">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="DarkBlue"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            
+        </Style>
+        <Style TargetType="TextBlock" x:Key="BookNameTextStyle">
+            <Setter Property="Foreground" Value="DarkBlue"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="BookDescriptionTextStyle">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style TargetType="ListViewItem" x:Key="ListViewItemStyle">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
                         <Border Background="{TemplateBinding Background}">
                             <Grid>
-                                <Button Content="Show Details" Click="ShowDetails_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,5,10,10" Tag="{Binding Bookid}" />
-                                <GridViewRowPresenter />
-                                <Button Content="Delete" Click="DeleteBook_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,5" Tag="{Binding Bookid}" />
-
+                                <TextBlock Text="{Binding Bookname}" Style="{StaticResource BookNameTextStyle}" Margin="10,0,0,0"/>
+                                <TextBlock Text="{Binding Description}" Style="{StaticResource BookDescriptionTextStyle}" Margin="10,30,0,0"/>
+                                <Button Content="Show Details" Click="ShowDetails_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,5,60,10" Tag="{Binding Bookid}" Style="{StaticResource PrimaryButtonStyle}" Background="DarkBlue" Foreground="White" FontWeight="Bold"/>
+                                <Button Content="Delete" Click="DeleteBook_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,5" Tag="{Binding Bookid}" Style="{StaticResource PrimaryButtonStyle}" Background="DarkBlue" Foreground="White" FontStyle="Normal" FontWeight="Bold"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        
+        <Style TargetType="StackPanel" x:Key="BookDetailsPanelStyle">
+            <Setter Property="Orientation" Value="Vertical"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
     </Window.Resources>
     
     <Grid>
         
-        <StackPanel Margin="2" VerticalAlignment="Top" x:Name="AddBookPanel">
-            <TextBlock Margin="10,10,0,0" Width="80" Text="Book name:" />
-            <TextBox x:Name="NewBookNameTextBox" Width="450" Margin="0,5,0,12" />
+        <StackPanel Margin="2" VerticalAlignment="Top" x:Name="AddBookPanel" Style="{StaticResource BookDetailsPanelStyle}">
+            <TextBlock Margin="10,10,0,0" Width="80" Text="Book name:" Style="{StaticResource BookTextBlockStyle}" FontWeight="Bold" FontSize="12" />
+            <TextBox x:Name="NewBookNameTextBox" Width="450" Margin="0,5,0,12" Style="{StaticResource BookTextBoxStyle}"/>
 
-            <TextBlock Margin="10,0,0,0" Width="80" Text="Description:" />
-            <TextBox x:Name="NewBookDescriptionTextBox" Width="450" Height="40" Margin="0,5,0,5" />
+            <TextBlock Margin="10,0,0,0" Width="80" Text="Description:" Style="{StaticResource BookTextBlockStyle}" FontWeight="Bold" FontSize="12" />
+            <TextBox x:Name="NewBookDescriptionTextBox" Width="450" Height="40" Margin="0,5,0,5" Style="{StaticResource BookTextBoxStyle}"/>
 
-            <Button Content="Add book"  Width="150" Click="AddBookConfirm_Click" />
+            <Button Content="Add book"  Width="150" Click="AddBookConfirm_Click" Style="{StaticResource PrimaryButtonStyle}" Background="DarkBlue" Foreground="White"/>
         </StackPanel>
         
-        <ListView Name="BooksListView" Margin="10,155" Grid.Row="1" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+        <ListView Name="BooksListView" Margin="10,155, 0, 0" Grid.Row="1" ItemContainerStyle="{StaticResource ListViewItemStyle}" Style="{StaticResource BooksListBoxStyle}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Bookname}" Width="150" />
-                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150" />
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource GridViewHeaderStyle}"/>
+                    </GridView.ColumnHeaderContainerStyle>
+
                     
                 </GridView>
             </ListView.View>

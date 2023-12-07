@@ -97,8 +97,7 @@ namespace Presentation
                 bll.deleteBook(bookId);
             }
         }
-
-
+        
     }
 }
 

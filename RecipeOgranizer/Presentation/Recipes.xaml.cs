@@ -24,6 +24,7 @@ namespace Presentation
     public partial class Recipes : Window
     {
         public int BookId;
+
         public Recipes(int bookid)
         {
             InitializeComponent();
@@ -43,6 +44,57 @@ namespace Presentation
                 DataContext = bookInfo;
 
                 RecipesListBox.ItemsSource = recipes;
+            }
+        }
+
+        private void AddRecipeConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            string recipeName = NewRecipeNameTextBox.Text;
+            string recipeIngredients = NewIngredientsTextBox.Text;
+            string recipeProcess = NewProcessTextBox.Text;
+
+            AddRecipe(recipeName, recipeIngredients, recipeProcess);
+
+            RefreshRecipesList();
+
+            AddRecipePanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void DeleteRecipe_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int resipeId = (int)button.Tag;
+
+            DeleteRecipe(resipeId);
+
+            RefreshRecipesList();
+        }
+
+        private void RefreshRecipesList()
+        {
+            using (RecipeOrganizerContext context = new RecipeOrganizerContext())
+            {
+                Bll bll = new Bll(context);
+                List<Recipe> recipes = bll.GetRecipes(BookId);
+                RecipesListBox.ItemsSource = recipes;
+            }
+        }
+
+        private void AddRecipe(string name, string ingredients, string process)
+        {
+            using (RecipeOrganizerContext context = new RecipeOrganizerContext())
+            {
+                Bll bll = new Bll(context);
+                bll.addRecipe(name, ingredients, process);
+            }
+        }
+
+        private void DeleteRecipe(int recipeId)
+        {
+            using (RecipeOrganizerContext context = new RecipeOrganizerContext())
+            {
+                Bll bll = new Bll(context);
+                bll.deleteRecipe(recipeId);
             }
         }
     }
