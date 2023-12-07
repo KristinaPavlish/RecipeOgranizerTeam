@@ -20,25 +20,59 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
-        
+
         <StackPanel Margin="2" VerticalAlignment="Top" x:Name="AddBookPanel">
             <TextBlock Margin="10,10,0,0" Width="80" Text="Book name:" />
-            <TextBox x:Name="NewBookNameTextBox" Width="450" Margin="0,5,0,12" />
+            <TextBox x:Name="NewBookNameTextBox" Width="450" Margin="0,5,0,12">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Background" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Yellow"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
 
             <TextBlock Margin="10,0,0,0" Width="80" Text="Description:" />
-            <TextBox x:Name="NewBookDescriptionTextBox" Width="450" Height="40" Margin="0,5,0,5" />
+            <TextBox x:Name="NewBookDescriptionTextBox" Width="450" Height="40" Margin="0,5,0,5">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Background" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Yellow"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
 
-            <Button Content="Add book"  Width="150" Click="AddBookConfirm_Click" />
+            <Button Content="Add book" Width="150">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Blue"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
         </StackPanel>
-        
+
         <ListView Name="BooksListView" Margin="10,155" Grid.Row="1" ItemContainerStyle="{StaticResource ListViewItemStyle}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Bookname}" Width="150" />
                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150" />
-                    
+
                 </GridView>
             </ListView.View>
         </ListView>
