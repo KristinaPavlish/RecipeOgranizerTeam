@@ -4,9 +4,30 @@
 
 namespace RecipeOrganizer.Bll
 {
+    using System.Net;
+    using System.Reflection;
     using System.Text.RegularExpressions;
     using RecipeOgranizer.Dal.Context;
     using RecipeOgranizer.Dal.Models;
+    using Serilog;
+
+    public class BllLogger
+    {
+        private static readonly ILogger logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File("C:\\RecipeOgranizerTeam\\RecipeOgranizer\\RecipeOrganizer.Bll\\Documents\\RecipeOrganizerLog.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
+
+        public static void LogMessage(string message)
+        {
+            logger.Information(message);
+        }
+
+        public static void LogException(Exception exception)
+        {
+            logger.Error(exception, "Exception occurred");
+        }
+    }
 
     /// <summary>
     /// This is the business logic layer class.
@@ -64,7 +85,18 @@ namespace RecipeOrganizer.Bll
         /// <returns>The user if found, null otherwise.</returns>
         public User? GetUserByEmail(string email)
         {
-            return this.context.Users.FirstOrDefault(u => u.Email == email);
+            var result = this.context.Users.FirstOrDefault(u => u.Email == email);
+
+            if (result == null)
+            {
+                BllLogger.LogMessage($"Attempt to find \"{email}\". Provided email is unique!");
+            }
+            else
+            {
+                BllLogger.LogMessage($"Attempt to find \"{email}\". Provided email exists in database!");
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -79,9 +111,11 @@ namespace RecipeOrganizer.Bll
 
             if (user != null && user.Userpassword == password)
             {
+                BllLogger.LogMessage("User login successful for email: " + email);
                 return true;
             }
 
+            BllLogger.LogMessage("User login failed for email: " + email);
             return false;
         }
 
@@ -98,24 +132,28 @@ namespace RecipeOrganizer.Bll
             if (this.UserExists(email))
             {
                 message = "Email must be unique!";
+                BllLogger.LogMessage($"User registration failed for email: {email}. {message}");
                 return false;
             }
 
             if (!IsValidEmail(email))
             {
                 message = "Email must be correct!";
+                BllLogger.LogMessage($"User registration failed for email: {email}. {message}");
                 return false;
             }
 
             if (!IsValidUsername(username))
             {
                 message = "Username must be correct!";
+                BllLogger.LogMessage($"User registration failed for email: {email}. {message}");
                 return false;
             }
 
             if (!IsValidPassword(password))
             {
                 message = "Password must be correct!";
+                BllLogger.LogMessage($"User registration failed for email: {email}. {message}");
                 return false;
             }
 
@@ -127,7 +165,7 @@ namespace RecipeOrganizer.Bll
             };
             this.context.Set<User>().Add(newUser);
             this.context.SaveChanges();
-
+            BllLogger.LogMessage($"User registration successful for email: {email}.");
             return true;
         }
 
@@ -143,6 +181,7 @@ namespace RecipeOrganizer.Bll
             if (user != null)
             {
                 var userCookerybooks = this.context.Set<Cookerybook>().Where(c => c.Userid == user.Userid).ToList();
+                BllLogger.LogMessage($"Cookery books for \"{email}\" are found.");
                 return userCookerybooks;
             }
 
@@ -156,6 +195,7 @@ namespace RecipeOrganizer.Bll
         /// <returns>The cookery book if found, null otherwise.</returns>
         public Cookerybook GetBookById(int bookid)
         {
+            BllLogger.LogMessage($"Get information about book with id: {bookid}");
             return this.context.Set<Cookerybook>().First(b => b.Bookid == bookid);
         }
 
@@ -171,6 +211,7 @@ namespace RecipeOrganizer.Bll
             if (book != null)
             {
                 var recipes = this.context.Set<Recipe>().Where(r => r.Bookid == book.Bookid).ToList();
+                BllLogger.LogMessage($"Get information about recipes in the book with id: {bookid}.");
                 return recipes;
             }
 
@@ -189,7 +230,7 @@ namespace RecipeOrganizer.Bll
                 Bookname = name,
                 Description = description,
             };
-
+            BllLogger.LogMessage($"New book is added.");
             this.context.Cookerybooks.Add(newBook);
 
             this.context.SaveChanges();
@@ -202,11 +243,17 @@ namespace RecipeOrganizer.Bll
         public void DeleteBook(int bookid)
         {
             Cookerybook? bookToDelete = this.context.Cookerybooks.Find(bookid);
+            BllLogger.LogMessage($"Attemp to find a book with id: {bookid}.");
 
             if (bookToDelete != null)
             {
+                BllLogger.LogMessage($"Book with id: {bookid} is found and deleted.");
                 this.context.Cookerybooks.Remove(bookToDelete);
                 this.context.SaveChanges();
+            }
+            else
+            {
+                BllLogger.LogMessage($"Attemp to find a book with id: {bookid} is failed.");
             }
         }
 
@@ -228,6 +275,7 @@ namespace RecipeOrganizer.Bll
             this.context.Recipes.Add(newRecipe);
 
             this.context.SaveChanges();
+            BllLogger.LogMessage($"New recipe is added");
         }
 
         /// <summary>
@@ -237,11 +285,17 @@ namespace RecipeOrganizer.Bll
         public void DeleteRecipe(int recipeid)
         {
             Recipe? recipeToDelete = this.context.Recipes.Find(recipeid);
+            BllLogger.LogMessage($"Attemp to find a recipe with id: {recipeid}");
 
             if (recipeToDelete != null)
             {
                 this.context.Recipes.Remove(recipeToDelete);
                 this.context.SaveChanges();
+                BllLogger.LogMessage($"Recipe with id: {recipeid} is found and deleted.");
+            }
+            else
+            {
+                BllLogger.LogMessage($"Attemp to find a recipe with id: {recipeid} is failed.");
             }
         }
 
