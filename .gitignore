@@ -15,3 +15,5 @@ bin
 /.vs
 *.testlog
 *.manifest
+*.bin
+*.config
