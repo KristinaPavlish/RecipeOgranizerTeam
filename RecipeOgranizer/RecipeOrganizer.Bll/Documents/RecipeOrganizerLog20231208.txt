@@ -1,0 +1,14 @@
+2023-12-08 11:13:40.415 +02:00 [INF] Attempt to find "john.doe@example.com". Provided email exists in database!
+2023-12-08 11:13:40.460 +02:00 [INF] User login successful for email: john.doe@example.com
+2023-12-08 11:13:40.561 +02:00 [INF] Attempt to find "john.doe@example.com". Provided email exists in database!
+2023-12-08 11:13:40.617 +02:00 [INF] Cookery books for "john.doe@example.com" are found.
+2023-12-08 11:13:47.335 +02:00 [INF] Get information about book with id: 1
+2023-12-08 11:13:47.415 +02:00 [INF] Get information about recipes in the book with id: 1.
+2023-12-08 11:13:47.416 +02:00 [INF] Get information about book with id: 1
+2023-12-08 11:14:18.407 +02:00 [INF] New recipe is added
+2023-12-08 11:14:18.407 +02:00 [INF] Get information about book with id: 1
+2023-12-08 11:14:18.409 +02:00 [INF] Get information about recipes in the book with id: 1.
+2023-12-08 11:36:16.714 +02:00 [INF] Attempt to find "john.doe@example.com". Provided email exists in database!
+2023-12-08 11:36:16.768 +02:00 [INF] User login successful for email: john.doe@example.com
+2023-12-08 11:36:16.860 +02:00 [INF] Attempt to find "john.doe@example.com". Provided email exists in database!
+2023-12-08 11:36:16.915 +02:00 [INF] Cookery books for "john.doe@example.com" are found.

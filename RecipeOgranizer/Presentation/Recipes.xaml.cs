@@ -88,7 +88,7 @@ namespace Presentation
             using (RecipeOrganizerContext context = new RecipeOrganizerContext())
             {
                 Bll bll = new Bll(context);
-                bll.addRecipe(name, ingredients, process);
+                bll.AddRecipe(name, ingredients, process);
             }
         }
 
@@ -97,7 +97,7 @@ namespace Presentation
             using (RecipeOrganizerContext context = new RecipeOrganizerContext())
             {
                 Bll bll = new Bll(context);
-                bll.deleteRecipe(recipeId);
+                bll.DeleteRecipe(recipeId);
             }
         }
     }

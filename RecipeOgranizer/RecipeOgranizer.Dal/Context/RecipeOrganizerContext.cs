@@ -52,7 +52,7 @@ namespace RecipeOgranizer.Dal.Context
         /// </summary>
         /// <param name="optionsBuilder">Будівельник, який використовується для створення або зміни параметрів для цього контексту.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=RecipeOrganizer;User Id=postgres;Password=user222;");
+            => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=RecipeOrganizer;User Id=postgres;Password=adminadmin;");
 
         /// <summary>
         /// Налаштовує модель, яка була виявлена за допомогою угоди з типами сутностей, відкритих у властивостях <see cref="DbSet{TEntity}"/> на вашому похідному контексті.
